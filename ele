@@ -1,0 +1,169 @@
+seven segment:
+#include<reg51.h>
+void delay();
+char arr[10]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
+void main()
+{
+unsigned char count = 0;
+P3=0X00;
+P1=0X0F;
+while(1)
+{
+count = P1;
+count = count & 0X0F;
+P3=arr[count];
+delay();
+delay();
+}
+}
+void delay()
+{
+int i;
+for(i=0;i<=30000;i++);
+}
+traffic light 
+#include<reg51.h>
+sbit rn=P3^0;
+sbit yn=P3^1;
+sbit rs=P3^2;
+sbit ys=P3^3;
+sbit rw=P3^4;
+sbit yw=P3^5;
+sbit re=P3^6;
+sbit ye=P3^7;
+sbit gn=P2^0;
+sbit gs=P2^1;
+sbit gw=P2^2;
+sbit ge=P2^3;
+void delay()
+{
+long int i;
+for(i=0;i<=50000;i++); //3 sec
+}
+void main()
+{
+while (1)
+{
+//north
+rn=1;rs=0;rw=0; re=0;
+gn=0;gs=1;gw=1;ge=1;
+yn=1;ys=1;yw=1;ye=1;
+delay();delay();delay();delay();delay(); //15 sec
+//south
+rn=0;rs=1;rw=0; re=0;
+gn=1;gs=0;gw=1;ge=1;
+yn=1;ys=1;yw=1;ye=1;
+delay();delay();delay();delay();delay(); //15 sec
+//west
+rn=0;rs=0;rw=1; re=0;
+gn=1;gs=1;gw=0;ge=1;
+yn=1;ys=1;yw=1;ye=1;
+delay();delay();delay();delay();delay(); //15 sec
+//east
+rn=0;rs=0;rw=0; re=1;
+gn=1;gs=1;gw=1;ge=0;
+yn=1;ys=1;yw=1;ye=1;
+delay();delay();delay();delay();delay(); //15 sec
+}
+}
+lcd:
+#include<reg51.h>
+sbit RS=P3^0;
+sbit EN=P3^1;
+void LCDcmd()
+{
+RS=0;
+EN=1;
+EN=0;
+}
+void LCDdata()
+{
+RS=1;
+EN=1;
+EN=0;
+}
+void delay()
+{
+int i;
+for(i=0;i<30000;i++);
+}
+void main()
+{
+P1=0x38;
+LCDcmd();
+delay();
+P1=0x0E;
+LCDcmd();
+delay();
+P1=0x06;
+LCDcmd();
+delay();
+P1=0x01;
+LCDcmd();
+delay();
+P1=0x80;
+LCDcmd();
+delay();
+P1='W';
+LCDdata();
+delay();
+P1='E';
+LCDdata();
+delay();
+P1='L';
+LCDdata();
+delay();
+P1='C';
+LCDdata();
+delay();
+P1='O';
+LCDdata();
+delay();
+P1='M';
+LCDdata();
+delay();
+P1='E';
+LCDdata();
+delay();
+while(1);
+}
+stepper motor:
+#include<reg51.h>
+void delay();
+void main()
+{
+P2=0X00; //make port as a output
+P2=0X01;
+delay();
+P2=0X02;
+delay();
+P2=0X04;
+delay();
+P2=0X08;
+delay();
+}
+void delay()
+{
+int i;
+for(i=0;i<=3000;i++);
+}
+stepper motor:
+#include<reg51.h>
+void delay();
+void main()
+{
+P2=0X00; //make port as a output
+P2=0X01;
+delay();
+P2=0X02;
+delay();
+P2=0X04;
+delay();
+P2=0X08;
+delay();
+}
+void delay()
+{
+int i;
+for(i=0;i<=3000;i++);
+}
